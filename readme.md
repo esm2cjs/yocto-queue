@@ -1,64 +1,52 @@
-# yocto-queue [![](https://badgen.net/bundlephobia/minzip/yocto-queue)](https://bundlephobia.com/result?p=yocto-queue)
+# @esm2cjs/yocto-queue
 
-> Tiny queue data structure
-
-You should use this package instead of an array if you do a lot of `Array#push()` and `Array#shift()` on large arrays, since `Array#shift()` has [linear time complexity](https://medium.com/@ariel.salem1989/an-easy-to-use-guide-to-big-o-time-complexity-5dcf4be8a444#:~:text=O(N)%E2%80%94Linear%20Time) *O(n)* while `Queue#dequeue()` has [constant time complexity](https://medium.com/@ariel.salem1989/an-easy-to-use-guide-to-big-o-time-complexity-5dcf4be8a444#:~:text=O(1)%20%E2%80%94%20Constant%20Time) *O(1)*. That makes a huge difference for large arrays.
-
-> A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is an ordered list of elements where an element is inserted at the end of the queue and is removed from the front of the queue. A queue works based on the first-in, first-out ([FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics))) principle.
+This is a fork of https://github.com/sindresorhus/yocto-queue, but automatically patched to support ESM **and** CommonJS, unlike the original repository.
 
 ## Install
 
+You can use an npm alias to install this package under the original name:
+
 ```
-$ npm install yocto-queue
+npm i yocto-queue@npm:@esm2cjs/yocto-queue
+```
+
+```jsonc
+// package.json
+"dependencies": {
+    "yocto-queue": "npm:@esm2cjs/yocto-queue"
+}
+```
+
+but `npm` might dedupe this incorrectly when other packages depend on the replaced package. If you can, prefer using the scoped package directly:
+
+```
+npm i @esm2cjs/yocto-queue
+```
+
+```jsonc
+// package.json
+"dependencies": {
+    "@esm2cjs/yocto-queue": "^ver.si.on"
+}
 ```
 
 ## Usage
 
 ```js
-import Queue from 'yocto-queue';
+// Using ESM import syntax
+import Queue from "@esm2cjs/yocto-queue";
 
-const queue = new Queue();
-
-queue.enqueue('🦄');
-queue.enqueue('🌈');
-
-console.log(queue.size);
-//=> 2
-
-console.log(...queue);
-//=> '🦄 🌈'
-
-console.log(queue.dequeue());
-//=> '🦄'
-
-console.log(queue.dequeue());
-//=> '🌈'
+// Using CommonJS require()
+const Queue = require("@esm2cjs/yocto-queue").default;
 ```
 
-## API
+> **Note:**
+> Because the original module uses `export default`, you need to append `.default` to the `require()` call.
 
-### `queue = new Queue()`
+For more details, please see the original [repository](https://github.com/sindresorhus/yocto-queue).
 
-The instance is an [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols), which means you can iterate over the queue front to back with a “for…of” loop, or use spreading to convert the queue to an array. Don't do this unless you really need to though, since it's slow.
+## Sponsoring
 
-#### `.enqueue(value)`
+To support my efforts in maintaining the ESM/CommonJS hybrid, please sponsor [here](https://github.com/sponsors/AlCalzone).
 
-Add a value to the queue.
-
-#### `.dequeue()`
-
-Remove the next value in the queue.
-
-Returns the removed value or `undefined` if the queue is empty.
-
-#### `.clear()`
-
-Clear the queue.
-
-#### `.size`
-
-The size of the queue.
-
-## Related
-
-- [quick-lru](https://github.com/sindresorhus/quick-lru) - Simple “Least Recently Used” (LRU) cache
+To support the original author of the module, please sponsor [here](https://github.com/sindresorhus/yocto-queue).
