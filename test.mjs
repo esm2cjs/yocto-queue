@@ -1,5 +1,5 @@
 import test from 'ava';
-import Queue from './index.js';
+import Queue from './esm/index.js';
 
 test('.enqueue()', t => {
 	const queue = new Queue();
